@@ -1,4 +1,8 @@
-*.env
+client/.env
+server/config.env
+client/node_modules
+server/node_modules
+
 
 # Logs
 logs
