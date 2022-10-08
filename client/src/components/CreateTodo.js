@@ -10,9 +10,6 @@ function CreateTodo() {
     project: "",
     priority: "",
     due_date: "",
-    completed: false,
-    date_created: new Date.now(),
-    date_modified: new Date.now(),
   });
 
   const updateForm = (value) => {
@@ -39,9 +36,6 @@ function CreateTodo() {
       project: "",
       priority: "",
       due_date: "",
-      completed: false,
-      date_created: new Date.now(),
-      date_modified: new Date.now(),
     });
     navigate("/");
   }
