@@ -12,7 +12,7 @@ function TodoList() {
 
     const itemList = itemArray.map((item) => 
         <TodoItem 
-            id={item.id}
+            key={item.id}
             title={item.title} 
             date={item.date} 
             description={item.description} 

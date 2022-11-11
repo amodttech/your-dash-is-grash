@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
+import DatePicker from "react-datepicker";
+
+// import required css from library
+import "react-datepicker/dist/react-datepicker.css";
+
 export const CreateTodo = (props) => {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState();
   const [description, setDescription] = useState("");
-
-  console.log("title", title);
-  console.log("description", description);
+  const [startDate, setStartDate] = useState(new Date());
 
   const formParams = {
     title: title,
@@ -44,6 +47,12 @@ export const CreateTodo = (props) => {
           name="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+        />
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          showTimeSelect
+          dateFormat="Pp"
         />
         <button type="submit">CREATE</button>
       </form>
