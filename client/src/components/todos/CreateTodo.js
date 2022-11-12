@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-export const CreateTodo = ({ addTodo }) => {
+export const CreateTodo = () => {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState(null);
   const [description, setDescription] = useState("");
   const [dateNow, setDateNow] = useState(null);
+
+  const [todo, setTodo] = useState("");
 
   useEffect(() => {
     setDateNow(Date.now());
@@ -13,9 +15,12 @@ export const CreateTodo = ({ addTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setDateNow(Date.now());
-    addTodo(formParams);
+    if (todo !== "") {
+      
+    }
   };
+
+  console.log('todo', todo)
 
   const formParams = {
     title: title,
@@ -24,8 +29,6 @@ export const CreateTodo = ({ addTodo }) => {
     description: description,
     complete: false,
   };
-
-  console.log("formParams", formParams);
 
   return (
     <div>
