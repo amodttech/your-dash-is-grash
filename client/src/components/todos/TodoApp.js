@@ -14,7 +14,7 @@ export const TodoApp = () => {
   return (
     <div>
         <CreateTodo />
-        <TodoList />
+        <TodoList todos={todos} />
     </div>
   )
 
