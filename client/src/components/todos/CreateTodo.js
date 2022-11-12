@@ -1,37 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import DatePicker from "react-datepicker";
-
-// import required css from library
-import "react-datepicker/dist/react-datepicker.css";
-
-export const CreateTodo = (props) => {
+export const CreateTodo = ({ addTodo }) => {
   const [title, setTitle] = useState("");
-  const [dueDate, setDueDate] = useState();
+  const [dueDate, setDueDate] = useState(null);
   const [description, setDescription] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
+  const [dateNow, setDateNow] = useState(null);
+
+  useEffect(() => {
+    setDateNow(Date.now());
+  }, [dateNow]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setDateNow(Date.now());
+    addTodo(formParams);
+  };
 
   const formParams = {
     title: title,
     dueDate: dueDate,
-    dateCreated: Date.now(),
+    dateCreated: dateNow,
     description: description,
     complete: false,
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // addTodo(formParams);
-    setDescription(null);
-    setTitle(null);
-    setDueDate(null);
-  };
+  console.log("formParams", formParams);
 
   return (
     <div>
       <p>CREATE TASK</p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>TITLE</label>
         <input
           type="text"
@@ -48,12 +47,13 @@ export const CreateTodo = (props) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <DatePicker
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          showTimeSelect
-          dateFormat="Pp"
-        />
+        <label>DUE DATE</label>
+        <input
+          type="date"
+          id="due-date"
+          name="due-date"
+          onChange={(e) => setDueDate(e.target.value)}
+        ></input>
         <button type="submit">CREATE</button>
       </form>
     </div>

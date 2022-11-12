@@ -1,14 +1,15 @@
 import React from 'react'
 
-function TodoItem({id, title, date, description}) {
+function TodoItem({id, title, dueDate, description, complete}) {
 
 
   return (
     <li>
-        {id}
-        {title}
-        {date}
-        {description}
+        <p>id: {id}</p>
+        <p>title: {title}</p>
+        <p>due date: {dueDate}</p>
+        <p>description: {description}</p>
+        <p>complete: {complete ? `complete` : `incomplete`}</p>
     </li>
   )
 }

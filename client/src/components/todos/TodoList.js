@@ -1,21 +1,17 @@
 import React from 'react'
 import TodoItem from './TodoItem'
 
-function TodoList() {
+function TodoList({listData}) {
 
-    const itemArray = [
-        {id: 1, title: "first todo", date: Date.now(), description: "some dummy text for a description"},
-        {id: 2, title: "second todo", date: Date.now(), description: "some dummy text for a description"},
-        {id: 3, title: "third todo", date: Date.now(), description: "some dummy text for a description"},
-        {id: 4, title: "fourth todo", date: Date.now(), description: "some dummy text for a description"},
-]
 
-    const itemList = itemArray.map((item) => 
+    const itemList = listData.map((item) => 
         <TodoItem 
-            key={item.id}
+            key={item.dateCreated}
+            id={item.dateCreated}
             title={item.title} 
-            date={item.date} 
+            dueDate={item.dueDate}
             description={item.description} 
+            complete={item.complete}
         />
     )
 
