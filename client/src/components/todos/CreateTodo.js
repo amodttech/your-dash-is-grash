@@ -1,33 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import TodoList from "./TodoList";
 
-export const CreateTodo = () => {
+export const CreateTodo = ({ todos, setTodos }) => {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState(null);
   const [description, setDescription] = useState("");
   const [dateNow, setDateNow] = useState(null);
 
-  const [todo, setTodo] = useState("");
-
-  useEffect(() => {
-    setDateNow(Date.now());
-  }, [dateNow]);
+  const [todo, setTodo] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (todo !== "") {
-      
+      setTodos([
+        ...todos,
+        {
+          id: todos.length + 1,
+          title: title,
+          dueDate: dueDate,
+          dateCreated: Date.now(),
+          description: description,
+          complete: false,
+        },
+      ]);
     }
-  };
-
-  console.log('todo', todo)
-
-  const formParams = {
-    title: title,
-    dueDate: dueDate,
-    dateCreated: dateNow,
-    description: description,
-    complete: false,
   };
 
   return (
@@ -39,6 +37,7 @@ export const CreateTodo = () => {
           type="text"
           id="new-todo-input"
           name="title"
+          placeholder="what is the task?"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -47,6 +46,7 @@ export const CreateTodo = () => {
           type="text"
           id="new-todo-input"
           name="description"
+          placeholder="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />

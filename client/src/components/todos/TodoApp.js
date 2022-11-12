@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import TodoItem from "./TodoItem";
 import TodoList from "./TodoList";
 import { CreateTodo } from "./CreateTodo";
 
 export const TodoApp = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("todos");
+    if (savedTodos) {
+      return JSON.parse(savedTodos);
+    } else {
+      return [];
+    }
+  });
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -13,11 +19,10 @@ export const TodoApp = () => {
 
   return (
     <div>
-        <CreateTodo />
-        <TodoList todos={todos} />
+      <CreateTodo todos={todos} setTodos={setTodos} />
+      <TodoList todos={todos} />
     </div>
-  )
-
+  );
 };
 
 const mapStateToProps = (state) => ({});
